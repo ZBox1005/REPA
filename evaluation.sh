@@ -1,0 +1,12 @@
+torchrun --nnodes=1 --nproc_per_node=2 generate.py \
+  --model SiT-B/2 \
+  --num-fid-samples 50000 \
+  --ckpt /u/hli46/REPA/exps/sit-B-exp1/checkpoints/0050000.pt \
+  --path-type=linear \
+  --encoder-depth=8 \
+  --projector-embed-dims=768 \
+  --per-proc-batch-size=64 \
+  --mode=sde \
+  --num-steps=250 \
+  --cfg-scale=1.8 \
+  --guidance-high=0.7

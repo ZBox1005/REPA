@@ -1,0 +1,19 @@
+accelerate launch train.py \
+  --report-to="wandb" \
+  --allow-tf32 \
+  --mixed-precision="fp16" \
+  --seed=0 \
+  --path-type="linear" \
+  --prediction="v" \
+  --weighting="uniform" \
+  --model="SiT-B/2" \
+  --enc-type="dinov2-vit-b" \
+  --proj-coeff=0.5 \
+  --encoder-depth=8 \
+  --num-workers 8 \
+  --resume-step=50000 \
+  --output-dir="exps" \
+  --exp-name="sit-B-exp1" \
+  --checkpointing-steps=5000 \
+  --sampling-steps=2500 \
+  --data-dir=/u/hli46/REPA/processed_data_100/

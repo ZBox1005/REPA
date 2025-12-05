@@ -1,2 +1,8 @@
 *.DS_Store
 .vscode/
+imagenet_100/
+exps/
+processed_data_100/
+samples/
+evaluations/imagenet100_reference.npz
+classify_image_graph_def.pb

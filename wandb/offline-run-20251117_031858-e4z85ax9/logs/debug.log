@@ -1,0 +1,24 @@
+2025-11-17 03:18:58,851 INFO    MainThread:2356070 [wandb_setup.py:_flush():80] Current SDK version is 0.23.0
+2025-11-17 03:18:58,851 INFO    MainThread:2356070 [wandb_setup.py:_flush():80] Configure stats pid to 2356070
+2025-11-17 03:18:58,851 INFO    MainThread:2356070 [wandb_setup.py:_flush():80] Loading settings from /u/hli46/.config/wandb/settings
+2025-11-17 03:18:58,851 INFO    MainThread:2356070 [wandb_setup.py:_flush():80] Loading settings from /u/hli46/REPA/wandb/settings
+2025-11-17 03:18:58,851 INFO    MainThread:2356070 [wandb_setup.py:_flush():80] Loading settings from environment variables
+2025-11-17 03:18:58,851 INFO    MainThread:2356070 [wandb_init.py:setup_run_log_directory():713] Logging user logs to /u/hli46/REPA/wandb/offline-run-20251117_031858-e4z85ax9/logs/debug.log
+2025-11-17 03:18:58,851 INFO    MainThread:2356070 [wandb_init.py:setup_run_log_directory():714] Logging internal logs to /u/hli46/REPA/wandb/offline-run-20251117_031858-e4z85ax9/logs/debug-internal.log
+2025-11-17 03:18:58,851 INFO    MainThread:2356070 [wandb_init.py:init():840] calling init triggers
+2025-11-17 03:18:58,851 INFO    MainThread:2356070 [wandb_init.py:init():845] wandb.init called with sweep_config: {}
+config: {'_wandb': {}}
+2025-11-17 03:18:58,851 INFO    MainThread:2356070 [wandb_init.py:init():888] starting backend
+2025-11-17 03:19:00,306 INFO    MainThread:2356070 [wandb_init.py:init():891] sending inform_init request
+2025-11-17 03:19:00,478 INFO    MainThread:2356070 [wandb_init.py:init():899] backend started and connected
+2025-11-17 03:19:00,479 INFO    MainThread:2356070 [wandb_init.py:init():969] updated telemetry
+2025-11-17 03:19:00,709 INFO    MainThread:2356070 [wandb_init.py:init():993] communicating run to backend with 90.0 second timeout
+2025-11-17 03:19:00,891 INFO    MainThread:2356070 [wandb_init.py:init():1040] starting run threads in backend
+2025-11-17 03:19:02,613 INFO    MainThread:2356070 [wandb_run.py:_console_start():2504] atexit reg
+2025-11-17 03:19:02,613 INFO    MainThread:2356070 [wandb_run.py:_redirect():2352] redirect: wrap_raw
+2025-11-17 03:19:02,613 INFO    MainThread:2356070 [wandb_run.py:_redirect():2421] Wrapping output streams.
+2025-11-17 03:19:02,613 INFO    MainThread:2356070 [wandb_run.py:_redirect():2444] Redirects installed.
+2025-11-17 03:19:02,670 INFO    MainThread:2356070 [wandb_init.py:init():1080] run started, returning control to user process
+2025-11-17 03:19:02,671 INFO    MainThread:2356070 [wandb_run.py:_config_callback():1385] config_cb None None {'output_dir': 'exps', 'exp_name': 'linear-dinov2-b-enc8', 'logging_dir': 'logs', 'report_to': 'wandb', 'sampling_steps': 10000, 'resume_step': 10000, 'model': 'SiT-B/2', 'num_classes': 1000, 'encoder_depth': 8, 'fused_attn': True, 'qk_norm': False, 'data_dir': '/u/hli46/REPA/processed_data/', 'resolution': 256, 'batch_size': 128, 'allow_tf32': True, 'mixed_precision': 'fp16', 'epochs': 1400, 'max_train_steps': 400000, 'checkpointing_steps': 10000, 'gradient_accumulation_steps': 1, 'learning_rate': 0.0001, 'adam_beta1': 0.9, 'adam_beta2': 0.999, 'adam_weight_decay': 0.0, 'adam_epsilon': 1e-08, 'max_grad_norm': 1.0, 'seed': 0, 'num_workers': 4, 'path_type': 'linear', 'prediction': 'v', 'cfg_prob': 0.1, 'enc_type': 'dinov2-vit-b', 'proj_coeff': 0.5, 'weighting': 'uniform', 'legacy': False}
+2025-11-17 03:21:35,372 INFO    wandb-AsyncioManager-main:2356070 [service_client.py:_forward_responses():80] Reached EOF.
+2025-11-17 03:21:35,372 INFO    wandb-AsyncioManager-main:2356070 [mailbox.py:close():137] Closing mailbox, abandoning 0 handles.

@@ -74,8 +74,13 @@ class SILoss:
             model_target = d_alpha_t * images + d_sigma_t * noises
         else:
             raise NotImplementedError() # TODO: add x or eps prediction
-        model_output, zs_tilde  = model(model_input, time_input.flatten(), **model_kwargs)
-        denoising_loss = mean_flat((model_output - model_target) ** 2)
+        model_mean, model_log_var, zs_tilde  = model(model_input, time_input.flatten(), **model_kwargs)
+        sigma2 = torch.exp(model_log_var)
+        sigma = torch.exp(0.5 * model_log_var)
+        diff = model_target - model_mean
+        inv_var = torch.exp(-model_log_var)
+        nll = 0.5 * (diff * diff * inv_var + model_log_var)
+        denoising_loss = mean_flat(nll)
 
         # projection loss
         proj_loss = 0.

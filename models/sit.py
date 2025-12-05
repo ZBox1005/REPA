@@ -184,6 +184,7 @@ class SiT(nn.Module):
         self.path_type = path_type
         self.in_channels = in_channels
         self.out_channels = in_channels
+        self.prediction_channels = self.out_channels * 2
         self.patch_size = patch_size
         self.num_heads = num_heads
         self.use_cfg = use_cfg
@@ -206,7 +207,7 @@ class SiT(nn.Module):
         self.projectors = nn.ModuleList([
             build_mlp(hidden_size, projector_dim, z_dim) for z_dim in z_dims
             ])
-        self.final_layer = FinalLayer(decoder_hidden_size, patch_size, self.out_channels)
+        self.final_layer = FinalLayer(decoder_hidden_size, patch_size, self.prediction_channels)
         self.initialize_weights()
 
     def initialize_weights(self):
@@ -252,8 +253,8 @@ class SiT(nn.Module):
         x: (N, T, patch_size**2 * C)
         imgs: (N, C, H, W)
         """
-        c = self.out_channels
         p = self.x_embedder.patch_size[0] if patch_size is None else patch_size
+        c = x.shape[2] // (p * p)
         h = w = int(x.shape[1] ** 0.5)
         assert h * w == x.shape[1]
 
@@ -281,10 +282,11 @@ class SiT(nn.Module):
             x = block(x, c)                      # (N, T, D)
             if (i + 1) == self.encoder_depth:
                 zs = [projector(x.reshape(-1, D)).reshape(N, T, -1) for projector in self.projectors]
-        x = self.final_layer(x, c)                # (N, T, patch_size ** 2 * out_channels)
-        x = self.unpatchify(x)                   # (N, out_channels, H, W)
+        x = self.final_layer(x, c)                # (N, T, patch_size ** 2 * pred_channels)
+        x = self.unpatchify(x)                   # (N, pred_channels, H, W)
+        mean, log_var = torch.chunk(x, 2, dim=1)
 
-        return x, zs
+        return mean, log_var, zs
 
 
 #################################################################################

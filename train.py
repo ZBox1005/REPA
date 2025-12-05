@@ -145,6 +145,7 @@ def main(args):
         logger = create_logger(save_dir)
         logger.info(f"Experiment directory created at {save_dir}")
     device = accelerator.device
+    print(f"Device: {device}")
     if torch.backends.mps.is_available():
         accelerator.native_amp = False    
     if args.seed is not None:
@@ -234,7 +235,7 @@ def main(args):
         ckpt_name = str(args.resume_step).zfill(7) +'.pt'
         ckpt = torch.load(
             f'{os.path.join(args.output_dir, args.exp_name)}/checkpoints/{ckpt_name}',
-            map_location='cpu',
+            map_location='cpu', weights_only=False
             )
         model.load_state_dict(ckpt['model'])
         ema.load_state_dict(ckpt['ema'])
@@ -271,7 +272,8 @@ def main(args):
     gt_xs = sample_posterior(
         gt_xs.to(device), latents_scale=latents_scale, latents_bias=latents_bias
         )
-    ys = torch.randint(1000, size=(sample_batch_size,), device=device)
+    # ys = torch.randint(1000, size=(sample_batch_size,), device=device)
+    ys = torch.randint(args.num_classes, size=(sample_batch_size,), device=device)
     ys = ys.to(device)
     # Create sampling noise:
     n = ys.size(0)
@@ -396,7 +398,7 @@ def parse_args(input_args=None):
 
     # model
     parser.add_argument("--model", type=str)
-    parser.add_argument("--num-classes", type=int, default=1000)
+    parser.add_argument("--num-classes", type=int, default=100)
     parser.add_argument("--encoder-depth", type=int, default=8)
     parser.add_argument("--fused-attn", action=argparse.BooleanOptionalAction, default=True)
     parser.add_argument("--qk-norm",  action=argparse.BooleanOptionalAction, default=False)
@@ -413,7 +415,8 @@ def parse_args(input_args=None):
     # optimization
     parser.add_argument("--epochs", type=int, default=1400)
     parser.add_argument("--max-train-steps", type=int, default=400000)
-    parser.add_argument("--checkpointing-steps", type=int, default=50000)
+    # default 50000
+    parser.add_argument("--checkpointing-steps", type=int, default=5000)
     parser.add_argument("--gradient-accumulation-steps", type=int, default=1)
     parser.add_argument("--learning-rate", type=float, default=1e-4)
     parser.add_argument("--adam-beta1", type=float, default=0.9, help="The beta1 parameter for the Adam optimizer.")

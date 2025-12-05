@@ -24,6 +24,11 @@ import argparse
 from samplers import euler_sampler, euler_maruyama_sampler
 from utils import load_legacy_checkpoints, download_model
 
+import argparse
+import torch.serialization
+
+torch.serialization.add_safe_globals([argparse.Namespace])
+
 def create_npz_from_sample_folder(sample_dir, num=50_000):
     """
     Builds a single .npz file from a folder of .png samples.
@@ -183,7 +188,7 @@ if __name__ == "__main__":
 
     # model
     parser.add_argument("--model", type=str, choices=list(SiT_models.keys()), default="SiT-XL/2")
-    parser.add_argument("--num-classes", type=int, default=1000)
+    parser.add_argument("--num-classes", type=int, default=100)
     parser.add_argument("--encoder-depth", type=int, default=8)
     parser.add_argument("--resolution", type=int, choices=[256, 512], default=256)
     parser.add_argument("--fused-attn", action=argparse.BooleanOptionalAction, default=False)

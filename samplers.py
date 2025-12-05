@@ -56,7 +56,7 @@ def euler_sampler(
         ):
     # setup conditioning
     if cfg_scale > 1.0:
-        y_null = torch.tensor([1000] * y.size(0), device=y.device)
+        y_null = torch.tensor([100] * y.size(0), device=y.device)
     _dtype = latents.dtype    
     t_steps = torch.linspace(1, 0, num_steps+1, dtype=torch.float64)
     x_next = latents.to(torch.float64)
@@ -115,7 +115,7 @@ def euler_maruyama_sampler(
         ):
     # setup conditioning
     if cfg_scale > 1.0:
-        y_null = torch.tensor([1000] * y.size(0), device=y.device)
+        y_null = torch.tensor([100] * y.size(0), device=y.device)
             
     _dtype = latents.dtype
     
