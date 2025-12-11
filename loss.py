@@ -74,7 +74,8 @@ class SILoss:
             model_target = d_alpha_t * images + d_sigma_t * noises
         else:
             raise NotImplementedError() # TODO: add x or eps prediction
-        model_mean, model_log_var, zs_tilde  = model(model_input, time_input.flatten(), **model_kwargs)
+        # model_mean, model_log_var, zs_tilde  = model(model_input, time_input.flatten(), **model_kwargs)
+        model_mean, model_log_var = model(model_input, time_input.flatten(), **model_kwargs)
         sigma2 = torch.exp(model_log_var)
         sigma = torch.exp(0.5 * model_log_var)
         diff = model_target - model_mean
@@ -83,13 +84,14 @@ class SILoss:
         denoising_loss = mean_flat(nll)
 
         # projection loss
-        proj_loss = 0.
-        bsz = zs[0].shape[0]
-        for i, (z, z_tilde) in enumerate(zip(zs, zs_tilde)):
-            for j, (z_j, z_tilde_j) in enumerate(zip(z, z_tilde)):
-                z_tilde_j = torch.nn.functional.normalize(z_tilde_j, dim=-1) 
-                z_j = torch.nn.functional.normalize(z_j, dim=-1) 
-                proj_loss += mean_flat(-(z_j * z_tilde_j).sum(dim=-1))
-        proj_loss /= (len(zs) * bsz)
+        # proj_loss = 0.
+        # bsz = zs[0].shape[0]
+        # for i, (z, z_tilde) in enumerate(zip(zs, zs_tilde)):
+        #     for j, (z_j, z_tilde_j) in enumerate(zip(z, z_tilde)):
+        #         z_tilde_j = torch.nn.functional.normalize(z_tilde_j, dim=-1) 
+        #         z_j = torch.nn.functional.normalize(z_j, dim=-1) 
+        #         proj_loss += mean_flat(-(z_j * z_tilde_j).sum(dim=-1))
+        # proj_loss /= (len(zs) * bsz)
 
-        return denoising_loss, proj_loss
+        # return denoising_loss, proj_loss
+        return denoising_loss

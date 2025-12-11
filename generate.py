@@ -113,7 +113,7 @@ def main(args):
     if rank == 0:
         print(f"Total number of images that will be sampled: {total_samples}")
         print(f"SiT Parameters: {sum(p.numel() for p in model.parameters()):,}")
-        print(f"projector Parameters: {sum(p.numel() for p in model.projectors.parameters()):,}")
+        # print(f"projector Parameters: {sum(p.numel() for p in model.projectors.parameters()):,}")
     assert total_samples % dist.get_world_size() == 0, "total_samples must be divisible by world_size"
     samples_needed_this_gpu = int(total_samples // dist.get_world_size())
     assert samples_needed_this_gpu % n == 0, "samples_needed_this_gpu must be divisible by the per-GPU batch size"

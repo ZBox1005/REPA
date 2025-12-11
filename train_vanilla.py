@@ -332,7 +332,8 @@ def main(args):
             if global_step % args.checkpointing_steps == 0 and global_step > 0:
                 if accelerator.is_main_process:
                     checkpoint = {
-                        "model": model.module.state_dict(),
+                        # "model": model.module.state_dict(),
+                        "model": accelerator.unwrap_model(model).state_dict(),
                         "ema": ema.state_dict(),
                         "opt": optimizer.state_dict(),
                         "args": args,
