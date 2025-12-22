@@ -3,7 +3,7 @@
 
 # srun -A bfin-delta-gpu --time=00:30:00 --nodes=1 --ntasks-per-node=16 --partition=gpuA100x4 --gpus=1 --mem=16g --pty /bin/bash
 # salloc --mem=16g --nodes=1 --ntasks-per-node=1 --cpus-per-task=8 --partition=ghx4 --account=account_name --time=00:30:00 --gpus-per-node=1
-
+# srun --account=bfin-delta-gpu --time=08:00:00 --nodes=1 --ntasks-per-node=16 --partition=gpuH200x8 --gpus=1 --mem=32g --pty /bin/bash
 import kagglehub
 
 # Download latest version

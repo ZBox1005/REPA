@@ -1,7 +1,7 @@
 torchrun --nnodes=1 --nproc_per_node=1 generate.py \
   --model SiT-B/2 \
   --num-fid-samples 50000 \
-  --ckpt /u/hli46/REPA/exps/sit-B-exp2/checkpoints/0050000.pt \
+  --ckpt /u/hli46/REPA/exps/sit-B-exp2-MSE-vanilla/checkpoints/0050000.pt \
   --path-type=linear \
   --encoder-depth=8 \
   --projector-embed-dims=768 \

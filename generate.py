@@ -13,7 +13,7 @@ For a simple single-GPU/CPU sampling script, see sample.py.
 """
 import torch
 import torch.distributed as dist
-from models.sit import SiT_models
+from models.sit_vanilla_MSE import SiT_models
 from diffusers.models import AutoencoderKL
 from tqdm import tqdm
 import os
